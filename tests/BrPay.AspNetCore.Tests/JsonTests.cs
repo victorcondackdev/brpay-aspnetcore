@@ -21,8 +21,16 @@ public sealed class JsonTests
         Assert.Equal(PixKeyType.Phone, transfer.Key.Type);
         Assert.Null(transfer.Guarantor);
 
+        // The default encoder escapes '+' as +, so compare the parsed JSON, not the raw text.
         var written = JsonSerializer.Serialize(transfer, Web);
-        Assert.Equal("""{"payer":"52998224725","receiver":"12ABC34501DE35","key":"+5521987654321","guarantor":null}""", written);
+        using var doc = JsonDocument.Parse(written);
+        var root = doc.RootElement;
+        Assert.Equal("52998224725", root.GetProperty("payer").GetString());
+        Assert.Equal("12ABC34501DE35", root.GetProperty("receiver").GetString());
+        Assert.Equal("+5521987654321", root.GetProperty("key").GetString());
+        Assert.Equal(JsonValueKind.Null, root.GetProperty("guarantor").ValueKind);
+
+        Assert.Equal(transfer, JsonSerializer.Deserialize<Transfer>(written, Web));
     }
 
     [Theory]
