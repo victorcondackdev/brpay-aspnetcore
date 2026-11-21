@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>BrPay.AspNetCore</RootNamespace>
+    <PackageId>BrPay.AspNetCore</PackageId>
+    <Version>0.1.0</Version>
+    <Description>ASP.NET Core integration for Brazilian payment identifiers: DataAnnotations attributes ([Cpf], [Cnpj], [PixKey], [Cep], [BrlCents]), minimal API validation filters returning RFC 9457 problem details, and LGPD-friendly value objects (Cpf, Cnpj, PixKey) that bind from routes, serialize with System.Text.Json and mask themselves in logs.</Description>
+    <PackageTags>brazil;cpf;cnpj;pix;aspnetcore;minimal-api;validation;lgpd;payments</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/victorcondackdev/brpay-aspnetcore</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="BrPay.AspNetCore.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
